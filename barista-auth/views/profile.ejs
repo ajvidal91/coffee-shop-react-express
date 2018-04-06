@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <title>Barista Order Tracking</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="profileBody">
+  <header>
+    <div class="box">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+  </header>
+
+
+        <!-- LOCAL INFORMATION -->
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+
+                <% if (user.local.email) { %>
+                    <p>
+                        <strong>id</strong>: <%= user._id %><br>
+                        <strong>email</strong>: <%= user.local.email %><br>
+                        <strong>password</strong>: <%= user.local.password %>
+                    </p>
+
+                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                <% } else { %>
+                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                <% } %>
+
+            </div>
+
+    <div class="drinks">
+      <h3>On The Fly</h3>
+        <h4>Hot</h4>
+        <ul class="menu">
+          <li>Machiatto</li>
+          <li>Americano</li>
+          <li>Espresso</li>
+          <li>Double Espresso</li>
+          <li>Cappucino</li>
+          <li>Café Latte</li>
+        </ul>
+        <h4>Cold</h4>
+        <ul>
+          <li>Iced Coffee</li>
+          <li>Iced Americano</li>
+          <li>Cold Brew</li>
+        </ul>
+        </div>
+
+      <section class="orderSection">
+        <h4>*Create An Order*</h4>
+          <form action="/orders" method= "POST">
+          <fieldset>
+            <legend>Coffee - Small / Medium / Large</legend>
+            <label for="">Size </label>
+            <select class="Size" name="size">
+                    <option  value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                </select>
+
+
+            <label for="cream">Cream</label>
+            <input id="cream" name="cream" class="oneCream" value="cream" type="radio">
+            <label for="milk">Milk</label>
+            <input id="milk" name="milk" class="twoCream" value= "milk"type="radio">
+            <label for="sugar">Sugar</label>
+            <input id="sugar" name="sugar" class="oneSugar" value="sugar" type="radio">
+
+          </fieldset>
+          <input class="inName" type="text" name="name" value="" placeholder="Enter Name">
+          <input class="inCoffee" type="text" name="order" value="" placeholder="Enter Coffee Order">
+          <button type="submit" name="button">Submit Order</button>
+        </form>
+          <ul class="orders">
+          <% for(var i=0; i<orders.length; i++) {%>
+            <li class="order">
+              <span><%= orders[i].name %></span>
+              <span><%= orders[i].order %></span>
+              <span><%= orders[i].size %></span>
+              <span><%= orders[i].cream %></span>
+              <span><%= orders[i].milk %></span>
+              <span><%= orders[i].sugar %></span>
+              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+            </li>
+          <% } %>
+          </ul>
+    </section>
+<footer><h6>we spit in the coffee</h6></footer>
+<script src="main.js"></script>
+
+</body>
+</html>
